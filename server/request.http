@@ -1,0 +1,44 @@
+POST  http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username":"react1",
+  "password":"1234"
+}
+###
+POST  http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "username":"react",
+  "password":"1234"
+}
+###
+POST  http://localhost:5000/api/posts
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2JhZmE1OGMyNjYzMjA0MGYxNDciLCJpYXQiOjE2MjkxNzUyNzV9.JIT3kiOkHiFoiJ8WEgk8w3bd2HCUXgtQVY-nBydM7-g
+
+{ "title":"reactkkk",
+  "description":"thodo hello world!",
+  "url":"react.com",
+  "status":"TO LEARN"
+
+}
+###
+GET  http://localhost:5000/api/posts
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2JhZmE1OGMyNjYzMjA0MGYxNDciLCJpYXQiOjE2MjkxODUxOTJ9.WuvCH6Y-JYnV20qEA-QB_cCbkWjuTRIMqFMBMQv4zvM
+###
+PUT  http://localhost:5000/api/posts/611b4dc88851596850a512d7
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2JhZmE1OGMyNjYzMjA0MGYxNDciLCJpYXQiOjE2MjkxODUxOTJ9.WuvCH6Y-JYnV20qEA-QB_cCbkWjuTRIMqFMBMQv4zvM
+
+{
+  "title":"thodo127",
+  "description":"thoooopooooooooo",
+  "url":"https://thodo.com",
+  "status":"LEARNING"
+}
+###
+DELETE http://localhost:5000/api/posts/611b66547a81466b7c40a481
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2JhZmE1OGMyNjYzMjA0MGYxNDciLCJpYXQiOjE2MjkxODU0NjF9.GYE_-xzwpgIv6eoIeQXw5K_0q75GhA5Aw-Z9Sj_d3Uk
