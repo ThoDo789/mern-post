@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const authRouter = require("./routers/auth");
 const postRouter = require("./routers/post");
+const cors = require("cors");
 const PORT = "5000";
 const connectDB = async () => {
   try {
@@ -24,9 +25,10 @@ const connectDB = async () => {
 };
 connectDB();
 app.use(express.json()); //query data username and password;
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
+app.use(cors());
+// app.get("/", (req, res) => {
+//   res.send("hello world");
+// });
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
 
