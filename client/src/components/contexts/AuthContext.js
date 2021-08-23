@@ -14,35 +14,51 @@ const AuthContextProvider = ({ children }) => {
     user: null,
   });
   //authenticate
-  const loadUser = async()=>{
-    if(localStorage[LOCAL_STORAGE_TOKEN]){
-      setAuthToken(localStorage[LOCAL_STORAGE_TOKEN])
+  const loadUser = async () => {
+    if (localStorage[LOCAL_STORAGE_TOKEN]) {
+      setAuthToken(localStorage[LOCAL_STORAGE_TOKEN]);
     }
-        // if user get token invalid, delete token
+    // if user get token invalid, delete token
 
-      try {
-        const response = await axios.get(`${apiUrl}/auth`);
-        if(response.data.success)
-          dispatch({
-            type:'SET_AUTH',
-            payload:{isAuthenticated:true, user:response.data.user}}
-            )
-      } catch (error) {
-        localStorage.removeItem(LOCAL_STORAGE_TOKEN)
-        setAuthToken(null)
+    try {
+      const response = await axios.get(`${apiUrl}/auth`);
+      if (response.data.success)
         dispatch({
-          type:'SET_AUTH',
-          payload:{isAuthenticated:false, user:null}})
-      }
-  }
+          type: "SET_AUTH",
+          payload: { isAuthenticated: true, user: response.data.user },
+        });
+    } catch (error) {
+      localStorage.removeItem(LOCAL_STORAGE_TOKEN);
+      setAuthToken(null);
+      dispatch({
+        type: "SET_AUTH",
+        payload: { isAuthenticated: false, user: null },
+      });
+    }
+  };
 
-  useEffect(()=>{loadUser()},[])
+  useEffect(() => {
+    loadUser();
+  }, []);
+  //register
+  const registerUser = async (userForm) => {
+    try {
+      const response = await axios.post(`${apiUrl}/auth/register`, userForm);
+      if (response.data.success) {
+        localStorage.setItem(LOCAL_STORAGE_TOKEN, response.data.accessToken);
+      }
+      await loadUser();
+      return response.data;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: error.message };
+    }
+  };
   // login
 
-  
   const loginUser = async (userForm) => {
     try {
-      const response = await axios.post(`${apiUrl}/auth/login`,   userForm);
+      const response = await axios.post(`${apiUrl}/auth/login`, userForm);
       if (response.data.success) {
         localStorage.setItem(LOCAL_STORAGE_TOKEN, response.data.accessToken);
       }
@@ -54,7 +70,7 @@ const AuthContextProvider = ({ children }) => {
     }
   };
   // Context data
-  const authContextData = { loginUser,authState };
+  const authContextData = { loginUser, registerUser, authState };
   //return provider
 
   return (
