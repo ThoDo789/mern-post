@@ -16,9 +16,9 @@ Content-Type: application/json
 ###
 POST  http://localhost:5000/api/posts
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2JhZmE1OGMyNjYzMjA0MGYxNDciLCJpYXQiOjE2MjkxNzUyNzV9.JIT3kiOkHiFoiJ8WEgk8w3bd2HCUXgtQVY-nBydM7-g
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2Q2ODlkYzU4MTYzOThmODk2ZjYiLCJpYXQiOjE2Mjk3MDAwOTB9.h8Jwbm0Df-lj6adcv52pGDtX7clgcZOWvkYnjL2C_bo
 
-{ "title":"reactkkk",
+{ "title":"by thodo4",
   "description":"thodo hello world!",
   "url":"react.com",
   "status":"TO LEARN"
@@ -26,7 +26,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2
 }
 ###
 GET  http://localhost:5000/api/posts
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2JhZmE1OGMyNjYzMjA0MGYxNDciLCJpYXQiOjE2MjkxODUxOTJ9.WuvCH6Y-JYnV20qEA-QB_cCbkWjuTRIMqFMBMQv4zvM
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTFiM2Q2ODlkYzU4MTYzOThmODk2ZjYiLCJpYXQiOjE2Mjk3MDAwOTB9.h8Jwbm0Df-lj6adcv52pGDtX7clgcZOWvkYnjL2C_bo
 ###
 PUT  http://localhost:5000/api/posts/611b4dc88851596850a512d7
 Content-Type: application/json
