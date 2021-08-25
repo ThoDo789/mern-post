@@ -1,18 +1,31 @@
 import React, { useContext, useEffect } from "react";
 import { PostContext } from "../contexts/PostContext";
-import {Spinner, Card, Button, Row, Col, OverlayTrigger, Tooltip}  from "react-bootstrap";
+import {
+  Spinner,
+  Card,
+  Button,
+  Row,
+  Col,
+  OverlayTrigger,
+  Tooltip,
+  Toast,
+} from "react-bootstrap";
 
 import { AuthContext } from "../contexts/AuthContext";
 import SinglePost from "../posts/SinglePost";
 import AddPostModal from "../posts/AddPostModal";
 import addIcon from "../../assets/plus-circle-fill.svg"
+import UpdatePostModal from "../posts/UpdatePostModal";
 const DashBoard = () => {
     const {authState:{user:{username}}} = useContext(AuthContext)
 
 
   const {
-    
-    postState:  {  posts, postsLoading  },getPosts,setShowAddPostModal
+    postState: { posts, postsLoading,post },
+    getPosts,
+    setShowAddPostModal,
+    showToast: { show, message, type },
+    setShowToast,
   
   } = useContext(PostContext);
   //start get all posts
@@ -27,22 +40,25 @@ const DashBoard = () => {
        </div>
       )
     }else if(posts.length===0){
-      body=(
+      body = (
         <>
-        <Card className="text-center my-5 mx-5">
-            <Card.Header as='h1'>
-              Hi {username} !!
-            </Card.Header> 
+          <Card className="text-center my-5 mx-5">
+            <Card.Header as="h1">Hi {username} !!</Card.Header>
             <Card.Body>
               <Card.Title>Welcome to LearnIt </Card.Title>
               <Card.Text>
                 Click to button below to track your first skill ro learn!
               </Card.Text>
-              <Button variant="primary" >LearnIt</Button>
+              <Button
+                variant="primary"
+                onClick={()=>setShowAddPostModal(true)}
+              >
+                LearnIt
+              </Button>
             </Card.Body>
-        </Card>
+          </Card>
         </>
-      )
+      );
     }else{
       body=(
         <>
@@ -55,18 +71,42 @@ const DashBoard = () => {
         </Row>
         {/* open add post modal */}
         <OverlayTrigger placement='left' overlay={<Tooltip>Add a new thing to learn</Tooltip>}>
-        {({ ref, ...triggerHandler }) => (
-        <Button className="btn-floating" onClick={setShowAddPostModal.bind(this,true)} variant="none" {...triggerHandler}>
-          <img src={addIcon} alt="add" height="32" width="32" ref={ref} />
+       
+        <Button 
+        className="btn-floating" 
+        onClick={()=>setShowAddPostModal(true)}
+        variant="none" >
+          <img src={addIcon} alt="add" height="32" width="32" />
         </Button>
-         )}
+     
         </OverlayTrigger>
         </>
       )
     }
-  return <>{body}
-    <AddPostModal/>
-  </>;
+  return (
+    <>
+      {body}
+      <AddPostModal />
+      {post !== null && <UpdatePostModal />}
+      {/* after post is added ,show toast */}
+      <Toast
+        show={show}
+        style={{ position: "fixed", top: "20%", right: "10px" }}
+        className={`bg-${type} text-white`}
+        onClose={()=>setShowToast({
+          show: false,
+          message: "",
+          type: null,
+        })}
+        delay={3000}
+        autohide
+      >
+        <Toast.Body>
+          <strong>{message}</strong>
+        </Toast.Body>
+      </Toast>
+    </>
+  );
 };
 
 export default DashBoard;
